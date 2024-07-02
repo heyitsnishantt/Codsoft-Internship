@@ -1,0 +1,51 @@
+import numpy as np
+import datetime
+
+# List of daily quotes
+daily_quotes = [
+    "Believe you can and you're halfway there. - Theodore Roosevelt",
+    "The best way to predict the future is to create it. - Abraham Lincoln",
+    "Strive not to be a success, but rather to be of value. - Albert Einstein",
+    "It is never too late to be what you might have been. - George Eliot",
+    "The only way to do great work is to love what you do. - Steve Jobs",
+    "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+    "Your limitation—it's only your imagination. - Unknown",
+    "Push yourself, because no one else is going to do it for you. - Unknown",
+    "Great things never come from comfort zones. - Unknown",
+    "Dream it. Wish it. Do it. - Unknown"
+]
+
+
+# Function to get today's quote using NumPy
+def get_daily_quote(shown_quotes):
+    remaining_quotes = list(set(daily_quotes) - set(shown_quotes))
+    if not remaining_quotes:
+        shown_quotes.clear()
+        remaining_quotes = daily_quotes[:]
+    selected_quote = np.random.choice(remaining_quotes)
+    shown_quotes.append(selected_quote)
+    return selected_quote
+
+
+# Main function to interact with the user
+def main():
+    shown_quotes = []
+    print("Good morning!")
+    reply = input().strip().lower()
+
+    if reply in ['good morning', 'hello', 'hi', 'give me today\'s quote']:
+        while True:
+            print("\nHere's your quote for today:")
+            quote = get_daily_quote(shown_quotes)
+            print(f"\n{quote}")
+
+            another = input("\nWould you like to see another quote? (yes/no): ").strip().lower()
+            if another != 'yes':
+                print("\nHave a great day!")
+                break
+    else:
+        print("\nSorry, I didn't understand your reply. Have a great day!")
+
+
+if __name__ == "__main__":
+    main()
